@@ -1,0 +1,242 @@
+// Read written notes for Sass. Documentation - https://sass-lang.com/
+
+body {
+    margin: 1.5em;      // em -> relative unit. Primarily used when dealing with margins and paddings. Helps scale your websites well.
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1.3rem;      // rem -> relative unit. Primarily used when dealing with font-size.
+}
+
+// The hero image of our website
+.hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url('../images/main_landing_page_shoe.jpg');
+    background-size: cover;
+    background-position-x: 20%;
+    background-position-y: 20%;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    animation: introLoad 2s forwards;
+}
+
+nav {
+    position: fixed;
+    right: 0;
+    top: 0;
+    background: #ffffff;
+    height: 100vh;
+    width: 50%;
+    z-index: 100;
+    text-transform: uppercase;
+    transform: translateX(100%);
+    transition: transform .5s ease-in-out;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 8em;
+
+        a {
+            color: black;
+            padding: .75em 2em;
+            display: block;
+
+            &:hover {
+                background: rgb(235, 235, 235);
+            }
+        }
+    }
+
+    .close {
+        float: right;
+        margin: 2em;
+        width: 2.5em;
+    }
+}
+
+header {
+    // Flexbox is a layout model that allows elements to align and distribute space within a container. Using flexible widths and heights, elements can be aligned to fill a space or distribute space between elements, which makes it a great tool to use for responsive design systems.
+    display: flex;
+    justify-content: space-between;
+
+    // Feature of Sass
+    // Only svgs of header will be affected
+    svg {
+        width: 2.5em;
+        margin-top: -.6em;
+    }
+}
+
+h1 {
+    font-size: 3rem;
+    margin-top: 3em;
+    line-height: 3.3rem;
+}
+
+.subhead {
+    font-size: 1.4rem;
+}
+
+section.hero {
+    color: #ffffff;
+    animation: moveDown 1s ease-in-out forwards;
+    opacity: 0;
+}
+
+section.more-info {
+    margin-top: 25em;
+
+    img {
+        width: 100%;
+        object-fit: cover;
+        height: 20em;
+    }
+
+    .title {
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .desc {
+        line-height: 1.5rem;
+    }
+}
+
+.open-nav {
+    transform: translateX(0%);
+}
+
+@media only screen and (min-width: 680px) {
+    body {
+        margin: 1.5em 5em;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .more-info {
+        padding-top: 1.75em;
+    }
+
+    .shoes {
+        margin-bottom: 5em;
+    }
+}
+
+@media only screen and (min-width: 920px) {
+    .menu {
+        display: none;
+    }
+
+    nav {
+        transform: translateX(0);
+        position: unset;
+        display: block;
+        width: auto;
+        height: auto;
+        background: none;
+
+        svg.close {
+            display: none;
+        }
+
+        ul {
+            display: flex;
+            margin: 0;
+
+            a {
+                color: white;
+                padding: .5em 1.5em;
+                font-size: .9rem;
+                font-weight: bold;
+
+                &:hover {
+                    background: none;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .hero-img {
+        left: unset;
+        right: 0;
+        width: 50%;
+        height: 42em;
+    }
+
+    section.hero {
+        color: black;
+        height: auto;
+        width: 40%;
+        margin-bottom: 8em;
+
+        .subhead {
+            margin-bottom: 3em;
+        }
+    }
+
+    .shoes {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        gap: 3em;
+        margin-bottom: 8em;
+
+        img {
+            width: 25em;
+        }
+
+        .content {
+            padding-top: 1em;
+            text-align: right;
+            width: 25em;
+        }
+    }
+
+    .shoes.flipped {
+        grid-template-areas: "left right";
+
+        img {
+            grid-area: left;
+        }
+
+        .content {
+            text-align: left;
+            width: 25em;
+            justify-self: right;
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .wrapper {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+@keyframes introLoad {
+    from {
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    to {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+@keyframes moveDown {
+    from {
+        transform: translateY(-100px);
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
